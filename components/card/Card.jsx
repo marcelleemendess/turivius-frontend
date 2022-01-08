@@ -1,7 +1,8 @@
 import React from 'react';
-import { Panel, Button } from 'rsuite';
+import { Panel } from 'rsuite';
 import '../../styles/Card.css';
 import toast from 'react-hot-toast';
+import Image from "next/image"
 
 
 class Card extends React.Component {
@@ -16,32 +17,31 @@ class Card extends React.Component {
                 bordered
             >
                 <h1>{name} - {initials}</h1>
-                <h3>{nome}</h3>
-                <div className="">
+                <h2>{nome}</h2>
+                <div className="datas">
                     <p>{data_pub}</p>
                     <p>{data_jul}</p>
                 </div>
                 {content.map((c, id) =>
-                    <div key= {id}>
-                        {c.title === 'Ementa' ?
+                    <div className="content" key={id}>
+                         <div className="content-btn">
+                            {c.title === 'Ementa' ?
                                 <a href={url} target="_blank" rel="noreferrer">
-                                    <img width="50px" src='/pdf.png' alt='pdf'></img>
+                                    <Image width="60px" height="70px" src='/pdf.png' alt='pdf'/>
                                 </a>
-                        : null} 
-
-                        {c.title==='Ementa' ? <Button onClick={() => (navigator.clipboard.writeText(c.content), toast.success('Copied'))} >Copia Ementa</Button> : null}
-                        {c.title==='Ementa' ? <Button onClick={() => (navigator.clipboard.writeText(url), toast.success('Copied'))} >Copia PDF Link</Button> : null}
-
-                        <p key={c.title}>
-                            <b>{c.title}:</b>
-                            {c.content}
+                            : null} 
+                            {c.title==='Ementa' ? <button className="btn" onClick={() => (navigator.clipboard.writeText(c.content), toast.success('Copied'))} >Copiar Ementa</button> : null}
+                            {c.title==='Ementa' ? <button className="btn" onClick={() => (navigator.clipboard.writeText(url), toast.success('Copied'))} >Copiar PDF Link</button> : null}
+                        </div>
+                        <p className="content-text" key={c.title}>
+                            <b className="content-title">{c.title}:</b> {c.content}
                         </p>
                     </div>
                 )}
-
-                <Button className={`${voteData[arrId]?.vote==='like' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'like')}>Like</Button>
-                <Button className={`${voteData[arrId]?.vote==='dislike' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'dislike')}>Dislike</Button>
-             
+                <div className="btn-likes">
+                    <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'like')}><i className="fas fa-thumbs-up fa-2x"></i></button>
+                    <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, 'dislike')}><i className="fas fa-thumbs-down fa-2x"></i></button>
+                </div>  
             </Panel>
         )
     }

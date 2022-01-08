@@ -3,6 +3,95 @@
   margin: 5px;
 }
 
+h1 {
+  text-transform: uppercase;
+  font-size: 32px;
+  color: #001645;
+}
+
+h2 {
+  font-size: 24px;
+  color: #123b71;
+}
+
+.datas {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 15px 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-title {
+  font-size: 20px;
+  color: #001645;
+}
+.content-text {
+  font-size: 18px;
+  line-height: 150%;
+  /* word-wrap: break-word;
+  width: 80%; */
+}
+
+.content-btn {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background-color: #f37e00;
+  border: 1px solid transparent;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  margin: 10px;
+  padding: 11px 33px;
+  border-radius: 26px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 250ms;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  padding: 10px;
+
+  color: #aaaa;
+}
+
+.btn--like {
+  cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 250ms;
+}
+
+.btn--like:hover {
+  transform: translateY(-1px);
+}
+
 .active {
-  color: red;
+  color: #15c16b;
+}
+
+.inactive {
+  color: #e61e25;
 }
