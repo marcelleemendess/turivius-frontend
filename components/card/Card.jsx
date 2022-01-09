@@ -1,12 +1,11 @@
 import React from 'react';
-import { Panel} from 'rsuite';
+import { Panel, Button} from 'rsuite';
 import '../../styles/Card.css';
 import toast from 'react-hot-toast';
 import Image from "next/image"
 
-
 class Card extends React.Component {
-
+    
     render() {
         const {content, nome, data_pub, data_jul, initials, name, url, arrId, toggleLike, voteData} = this.props
 
@@ -24,30 +23,32 @@ class Card extends React.Component {
                 </div>
                 {content.map((c, id) =>
                     <div className="content" key={id}>
+                        {console.log(id)}
                         <div className="content-btn">
                             {c.title === 'Ementa' ?
                                 <a className="btn-pdf" href={url} target="_blank" rel="noreferrer">
                                     <Image width="60px" height="70px" src='/pdf.png' alt='pdf'/>
                                 </a>
                             : null} 
-                            {c.title==='Ementa' ? <button className="btn" onClick={() => (navigator.clipboard.writeText(c.content), toast.success('Copied'))} >Copiar Ementa</button> : null}
-                            {c.title==='Ementa' ? <button className="btn" onClick={() => (navigator.clipboard.writeText(url), toast.success('Copied'))} >Copiar PDF Link</button> : null}
+                            {c.title === 'Ementa'  ? <button className="btn" onClick={() => (navigator.clipboard.writeText(c.content), toast.success('Copied'))} >Copiar </button> : null}
+                            {/* {c.title==='Ementa' ? <button className="btn" onClick={() => (navigator.clipboard.writeText(url), toast.success('Copied'))} >Copiar PDF Link</button> : null} */}
                         </div>
                         <p className="content-text" key={c.title}>
                             <b className="content-title">{c.title}:</b> {c.content}
                         </p>
-                    </div>
+                    </div>   
                 )}
+                
                 <div className="btn-likes">
-                    {!voteData[arrId]?.vote || voteData[arrId]?.vote==='dislike' ? 
+                    {!voteData[arrId]?.vote || voteData[arrId]?.vote ==='dislike' ? 
                         <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'like')}><i className="fas fa-thumbs-up fa-2x"></i></button>
-                    : voteData[arrId]?.vote==='like' ?
+                    : voteData[arrId]?.vote === 'like' ?
                         <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, '')}><i className="fas fa-thumbs-up fa-2x"></i></button>
                     : null}
 
                     {!voteData[arrId]?.vote || voteData[arrId]?.vote==='like' ? 
                         <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, 'dislike')}><i className="fas fa-thumbs-down fa-2x"></i></button>
-                    : voteData[arrId]?.vote==='dislike' ?
+                    : voteData[arrId]?.vote ==='dislike' ?
                         <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, '')}><i className="fas fa-thumbs-down fa-2x"></i></button>
                     : null}
                 </div> 
