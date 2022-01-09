@@ -7,18 +7,18 @@ import { useState } from 'react';
 export default function Home(props) {
   const [voteData, setVoteData] = useState({})
 
-  //função para mesclar data de entities no card correspondente
+  //função para mesclar data de entities no card correspondente (merge apis)
   const mergeById = (arr1, arr2) =>
     arr1.map(card => ({
     ...arr2.find((entity) => (card.entity === entity.id)),
     ...card
   }));
   
+  //nova array de cards com entities data
   const mergedData = mergeById(props.cards, props.entities)
 
   //função para os botoes like/dislike no Component Card.jsx, arrId = index de cada card
   const toggleLike = (arrId, vote) => {
-    // set new object with array index and vote
     const newVote = { [arrId]: { vote } }
     setVoteData({...voteData, ...newVote})
   }
@@ -41,7 +41,6 @@ export default function Home(props) {
           <Grid fluid>
             <Row>
               {mergedData.map((mergedCard, index) =>
-              // do not user card.id as key -> multiple cards with same id value error
                 <Col key={index} sm={24}>
                   <Card {...mergedCard} arrId={index} toggleLike={toggleLike} voteData={voteData}/>
                 </Col>)}
