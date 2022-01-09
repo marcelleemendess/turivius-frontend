@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel } from 'rsuite';
+import { Panel} from 'rsuite';
 import '../../styles/Card.css';
 import toast from 'react-hot-toast';
 import Image from "next/image"
@@ -24,9 +24,9 @@ class Card extends React.Component {
                 </div>
                 {content.map((c, id) =>
                     <div className="content" key={id}>
-                         <div className="content-btn">
+                        <div className="content-btn">
                             {c.title === 'Ementa' ?
-                                <a href={url} target="_blank" rel="noreferrer">
+                                <a className="btn-pdf" href={url} target="_blank" rel="noreferrer">
                                     <Image width="60px" height="70px" src='/pdf.png' alt='pdf'/>
                                 </a>
                             : null} 
@@ -39,9 +39,18 @@ class Card extends React.Component {
                     </div>
                 )}
                 <div className="btn-likes">
-                    <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'like')}><i className="fas fa-thumbs-up fa-2x"></i></button>
-                    <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, 'dislike')}><i className="fas fa-thumbs-down fa-2x"></i></button>
-                </div>  
+                    {!voteData[arrId]?.vote || voteData[arrId]?.vote==='dislike' ? 
+                        <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, 'like')}><i className="fas fa-thumbs-up fa-2x"></i></button>
+                    : voteData[arrId]?.vote==='like' ?
+                        <button className={`btn--like ${voteData[arrId]?.vote === 'like' ? 'active' : null}`} onClick={() => toggleLike(arrId, '')}><i className="fas fa-thumbs-up fa-2x"></i></button>
+                    : null}
+
+                    {!voteData[arrId]?.vote || voteData[arrId]?.vote==='like' ? 
+                        <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, 'dislike')}><i className="fas fa-thumbs-down fa-2x"></i></button>
+                    : voteData[arrId]?.vote==='dislike' ?
+                        <button className={`btn--like ${voteData[arrId]?.vote === 'dislike' ? 'inactive' : null}`} onClick={() => toggleLike(arrId, '')}><i className="fas fa-thumbs-down fa-2x"></i></button>
+                    : null}
+                </div> 
             </Panel>
         )
     }
